@@ -1,0 +1,121 @@
+/* ***** global ***** */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1,h2,h3,p,li,a,label,input{
+    font-family: 'Segoe UI', 'Roboto', arial, sans-serif;
+    color: rgb(34, 34, 34);
+}
+
+body{
+    background-color: #eee;
+}
+
+.hidden{
+    display: none;
+}
+
+/* ***** header ***** */
+
+header{
+    background-color: white;
+    top: 0;
+    padding: 20px 0;
+    border-bottom: 3px solid rgb(133, 133, 133);
+    border-top: 3px solid darkgrey;
+}
+
+.title{
+    margin: 10px 0 20px 10px;
+}
+
+/* ***** main body ***** */
+
+form,
+.error-message,
+#results,
+#results h2{
+    margin: 10px 0 20px 10px;
+}
+
+form{
+    border: none;
+}
+
+state-dropdown-select{
+    width: 30px;
+}
+
+#parks,
+#max-results{
+    border-radius: 4px;
+    border: 2px solid rgb(196, 196, 196);
+    padding: 3px;
+    margin-right: 10px;
+}
+
+#parks{
+    width: 300px;
+}
+
+#max-results{
+    width: 80px;
+}
+
+.submit{
+    padding: 3px 9px;
+    border-radius: 4px;
+    border: 2px solid rgb(196, 196, 196);
+    cursor: pointer;
+}
+
+.error-message{
+    color: rgb(207, 1, 1);
+    font-size: 18px;
+}
+
+/* ***** results section ***** */
+
+#results{
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    display: inline-block;
+    height: auto;
+    padding: 3px;
+}
+
+.sorry{
+    margin: 10px;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+  
+li {
+    padding: 30px;
+    display: block;
+}
+
+li p{
+    margin: 8px 0;
+}
+
+span{
+    font-weight: bold;
+}
+  
+li, img {
+    max-width: 900px;
+}
+
+a:hover{
+    color: rgb(4, 4, 212);
+    transition: 0.3s ease;
+}
