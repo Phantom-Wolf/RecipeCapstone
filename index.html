@@ -17,11 +17,25 @@
             <label for="recipe">search here:</label>
             <input type="text" name="recipe" id="recipe" required>
 
-            <label for="max-results">Maximum results to display:</label>
-            <input type="number" name="max-results" id="max-results" value="3">
-        
             <input type="submit" class="submit" value="Let's Go!">
+
         </form>
+
+
+        <div class="dropdown">
+            <button id="exclusion-button" class="dropbtn">Exclusions</button>
+            <div id="myExclusion" class="dropdown-contentA">
+               
+            </div>
+        </div>
+
+        <div class="dropdown">
+                <button id="intolerance-button" class="dropbtn">Allergies</button>
+                <div id="myIntolerance" class="dropdown-contentB">
+                    
+                </div>
+        </div>
+
 
         <p class="error-message err-js"></p>
 
@@ -31,11 +45,15 @@
 
             </ul>
         </section>
+
    </main>
-        <script
+
+   
+    <script
         src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous"></script>
+    <script src="STORE.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
