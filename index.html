@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/503137705b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="main.css">
     <title>recipes</title>
 </head>
@@ -13,28 +14,39 @@
    </header>
 
    <main>
-        <form>
-            <label for="recipe">search here:</label>
-            <input type="text" name="recipe" id="recipe" required>
+        <section class="main-search">
+            <!-- <div class="search-pair"> -->
+                <p>Find the perfect recipe: </p>
+                <input type="text" name="recipe" id="recipe-search" placeholder=" Choose any food!" required>
+            <!-- </div> -->
+            <div class="dropdown-pair">
+                <div class="dropdown">
+                    
+                    <button id="exclusion-button" class="dropbtn">Exclude Ingredients? <i class="fas fa-caret-down"></i> </button>
+                    <div id="myExclusion" class="dropdown-contentA">
+                            
+                    </div>
+                </div>
+                
+                <div class="dropdown">
+                    
+                    <button id="intolerance-button" class="dropbtn">Allergies? <i class="fas fa-caret-down"></i> </button>
+                    <div id="myIntolerance" class="dropdown-contentB">
+                            
+                    </div>
+                </div>
+            </div>
 
             <input type="submit" class="submit" value="Let's Go!">
 
-        </form>
+        </section>
 
 
-        <div class="dropdown">
-            <button id="exclusion-button" class="dropbtn">Exclusions</button>
-            <div id="myExclusion" class="dropdown-contentA">
-               
-            </div>
-        </div>
+        
 
-        <div class="dropdown">
-                <button id="intolerance-button" class="dropbtn">Allergies</button>
-                <div id="myIntolerance" class="dropdown-contentB">
-                    
-                </div>
-        </div>
+        
+
+        
 
 
         <p class="error-message err-js"></p>

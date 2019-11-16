@@ -6,14 +6,55 @@ function displayResults(responseJson){
 console.log(responseJson);
   $('.list').append(`
   
-  <li>
+  <li id="${responseJson.id}">
     <h2>${responseJson.title}</h2>
     <div class="short-recipe-container">
-    <img src="${responseJson.image}" alt="${responseJson.title}" class="recipe-image-short">
-    <p>Serving Size: ${responseJson.servings}</p>
+        <img src="${responseJson.image}" alt="${responseJson.title}" class="recipe-image-short">
+      <section class="prelimInfo">
+        <p>Serving Size: ${responseJson.servings}</p>
+        <p>Made ready in ${responseJson.readyInMinutes} minutes!</p>
+      </section>
+    </div>
+    <div class="recipeBody">
+      <section>
+        <h3>Ingredients</h3>
+        <ul class="ingredientsList">
+        </ul>
+      </section>
+      <section class="recipeInstructions">
+        
+      </section>
     </div>
   </li>
   `);
+
+  let ingredients = responseJson.extendedIngredients;
+  for (let i = 0; i < ingredients.length; i++){
+    $(`#${responseJson.id} .ingredientsList`).append(`
+    <li>
+      -${ingredients[i].original}
+    </li>
+    `)
+  }
+  let wine = responseJson.winePairing;
+  if (wine.pairedWines.length > "0"){
+    $(`#${responseJson.id} .prelimInfo`).append(`
+    <p>Wine Pairing: ${wine.pairingText}</p>
+    `)
+  }
+
+  if (responseJson.instructions !== null){
+    $(`#${responseJson.id} .recipeInstructions`).append(`
+      <h3>Instructions</h3>
+      <p>${responseJson.instructions}</p>
+    `)
+  } else{
+    $('.recipeInstructions').append(`
+    <h3>Instructions</h3>
+    <p>No instructions needed, just mix together!</p>
+  `)
+  }
+
 
   $('#results').show();
 
@@ -28,7 +69,7 @@ function formatQueryParams(params) {
 
 function getRecipes() {
 
-  let searchTerm = $('#recipe').val();
+  let searchTerm = $('#recipe-search').val();
 
   let exclusions = [];
   $('.dropdown-contentA input[type="checkbox"]:checked').each(function(){
@@ -47,7 +88,8 @@ function getRecipes() {
     query: searchTerm,
     number: 2,
     intolerances: allergies,
-    excludeIngredients: exclude
+    excludeIngredients: exclude,
+    maxReadyTime: 30,
     
   };
     
@@ -56,22 +98,45 @@ function getRecipes() {
   console.log(url)
    
   fetch(url)
-    .then(response => response.json())
-    .then(responseJson => getDetails(responseJson))
-    .catch(error => console.log(error));
-    
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error(resonse.statusText);
+  })
+  .then(responseJson => getDetails(responseJson))
+  .catch(error => {
+    $("#err-js").text(`Something went wrong: ${error.message}`);
+  });
 }
 
 function getDetails(responseJson) {
   console.log(responseJson)
-  for (let i = 0; i < responseJson.results.length; i++) {
 
-    fetch(
-      `https://api.spoonacular.com/recipes/${responseJson.results[i].id}/information?includeNutrition=false&apiKey=21b612134db24ae285c7a2db190c41fc`
-    )
-      .then(response => response.json())
+  if(responseJson.results.length < "1"){
+    $('#results').append(`
+    <p>Sorry! We did not find any matching results.</p>
+    `);
+    $('#results').show();
+  } else {
+
+  
+    for (let i = 0; i < responseJson.results.length; i++) {
+
+      fetch(
+        `https://api.spoonacular.com/recipes/${responseJson.results[i].id}/information?includeNutrition=false&apiKey=21b612134db24ae285c7a2db190c41fc`
+      )
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(resonse.statusText);
+      })
       .then(responseJson => displayResults(responseJson))
-      .catch(error => console.log(error));
+      .catch(error => {
+        $("#err-js").text(`Something went wrong: ${error.message}`);
+      });
+    }
   }
 }
 
@@ -84,6 +149,7 @@ function populateDropdowns(){
     `)
   }
 
+
   let allergy = STORE.allergies;
   for (let i = 0; i < allergy.length; i++ ){
     $('#myIntolerance').append(`
@@ -95,7 +161,7 @@ function populateDropdowns(){
 }
 
 function watchForm() {
-  $("form").submit(event => {
+  $(".submit").click(event => {
     event.preventDefault();
     $(".list").empty();
     $(".err-js").empty();
@@ -140,3 +206,4 @@ $(function toggleDropdown() {
     }
   });
 });
+

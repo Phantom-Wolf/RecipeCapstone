@@ -9,13 +9,13 @@ const STORE = {
         "Beans",
         "Brussels Sprouts",
         "Carrots",
-        "Cauliflower",
+        "Cauliflower and Broccoli",
         "Cilantro",
         "Mushrooms",
         "Olives",
         "Onions",
         "Tomatoes",
-        "Other"
+        "Pasta and Rice"
     ],
 
     allergies: [
