@@ -7,15 +7,23 @@ const STORE = {
         "Tofu",
         "Cheese",
         "Beans",
+        "Brocolli",
         "Brussels Sprouts",
         "Carrots",
-        "Cauliflower and Broccoli",
+        "Cauliflower",
+        "Celery",
         "Cilantro",
+        "Eggplant",
+        "Kale",
         "Mushrooms",
         "Olives",
         "Onions",
+        "Spinach",
         "Tomatoes",
-        "Pasta and Rice"
+        "Bread",
+        "Pasta",
+        "Rice",
+        
     ],
 
     allergies: [
