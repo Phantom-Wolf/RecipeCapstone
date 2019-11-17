@@ -1,10 +1,11 @@
-
 const apiKey = "21b612134db24ae285c7a2db190c41fc";
 let searchURL = "https://api.spoonacular.com/recipes/complexSearch";
 
-function displayResults(responseJson){
-console.log(responseJson);
-  $('.list').append(`
+// makes use of and formats the api request returns for html doc
+
+function displayResults(responseJson) {
+  console.log(responseJson);
+  $(".list").append(`
   
   <li id="${responseJson.id}">
     <h2>${responseJson.title}</h2>
@@ -29,36 +30,36 @@ console.log(responseJson);
   `);
 
   let ingredients = responseJson.extendedIngredients;
-  for (let i = 0; i < ingredients.length; i++){
+  for (let i = 0; i < ingredients.length; i++) {
     $(`#${responseJson.id} .ingredientsList`).append(`
     <li>
       -${ingredients[i].original}
     </li>
-    `)
+    `);
   }
   let wine = responseJson.winePairing;
-  if (wine.pairedWines.length > "0"){
+  if (wine.pairedWines.length > "0") {
     $(`#${responseJson.id} .prelimInfo`).append(`
     <p>Wine Pairing: ${wine.pairingText}</p>
-    `)
+    `);
   }
 
-  if (responseJson.instructions !== null){
+  if (responseJson.instructions !== null) {
     $(`#${responseJson.id} .recipeInstructions`).append(`
       <h3>Instructions</h3>
       <p>${responseJson.instructions}</p>
-    `)
-  } else{
-    $('.recipeInstructions').append(`
+    `);
+  } else {
+    $(".recipeInstructions").append(`
     <h3>Instructions</h3>
     <p>No instructions needed, just mix together!</p>
-  `)
+  `);
   }
 
-
-  $('#results').show();
-
+  $("#results").show();
 }
+
+// these 3 build the url request to the api and gethers the return
 
 function formatQueryParams(params) {
   const queryItems = Object.keys(params).map(
@@ -68,20 +69,19 @@ function formatQueryParams(params) {
 }
 
 function getRecipes() {
-
-  let searchTerm = $('#recipe-search').val();
+  let searchTerm = $("#recipe-search").val();
 
   let exclusions = [];
-  $('.dropdown-contentA input[type="checkbox"]:checked').each(function(){
+  $('.dropdown-contentA input[type="checkbox"]:checked').each(function() {
     exclusions.push($(this).val());
-  })
-  let exclude = exclusions.join(',');
+  });
+  let exclude = exclusions.join(",");
 
   let allergy = [];
-  $('.dropdown-contentB input[type="checkbox"]:checked').each(function(){
+  $('.dropdown-contentB input[type="checkbox"]:checked').each(function() {
     allergy.push($(this).val());
-  })
-  let allergies = allergy.join(',');
+  });
+  let allergies = allergy.join(",");
 
   const params = {
     apiKey: apiKey,
@@ -89,76 +89,74 @@ function getRecipes() {
     number: 2,
     intolerances: allergies,
     excludeIngredients: exclude,
-    maxReadyTime: 30,
-    
+    maxReadyTime: 30
   };
-    
+
   const queryString = formatQueryParams(params);
   const url = searchURL + "?" + queryString;
-  console.log(url)
-   
+  console.log(url);
+
   fetch(url)
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error(resonse.statusText);
-  })
-  .then(responseJson => getDetails(responseJson))
-  .catch(error => {
-    $("#err-js").text(`Something went wrong: ${error.message}`);
-  });
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(resonse.statusText);
+    })
+    .then(responseJson => getDetails(responseJson))
+    .catch(error => {
+      $("#err-js").text(`Something went wrong: ${error.message}`);
+    });
 }
 
 function getDetails(responseJson) {
-  console.log(responseJson)
+  console.log(responseJson);
 
-  if(responseJson.results.length < "1"){
-    $('#results').append(`
+  if (responseJson.results.length < "1") {
+    $("#results").append(`
     <p>Sorry! We did not find any matching results.</p>
     `);
-    $('#results').show();
+    $("#results").show();
   } else {
-
-  
     for (let i = 0; i < responseJson.results.length; i++) {
-
       fetch(
         `https://api.spoonacular.com/recipes/${responseJson.results[i].id}/information?includeNutrition=false&apiKey=21b612134db24ae285c7a2db190c41fc`
       )
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(resonse.statusText);
-      })
-      .then(responseJson => displayResults(responseJson))
-      .catch(error => {
-        $("#err-js").text(`Something went wrong: ${error.message}`);
-      });
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error(resonse.statusText);
+        })
+        .then(responseJson => displayResults(responseJson))
+        .catch(error => {
+          $("#err-js").text(`Something went wrong: ${error.message}`);
+        });
     }
   }
 }
 
-function populateDropdowns(){
+//  populates the drop down menus for exclusion and allergies
 
+function populateDropdowns() {
   let exclude = STORE.exclusions;
-  for (let i = 0; i < exclude.length; i++ ){
-    $('#myExclusion').append(`
+  for (let i = 0; i < exclude.length; i++) {
+    $("#myExclusion").append(`
     <label class="drop-items ${exclude[i]}"><input type="checkbox" name="exclusion" value="${exclude[i]}">${exclude[i]}</label>
-    `)
+    `);
   }
-
 
   let allergy = STORE.allergies;
-  for (let i = 0; i < allergy.length; i++ ){
-    $('#myIntolerance').append(`
+  for (let i = 0; i < allergy.length; i++) {
+    $("#myIntolerance").append(`
     <label class="drop-items ${allergy[i]}"><input type="checkbox" name="exclusion" value="${allergy[i]}">${allergy[i]}</label>
-    `)
+    `);
   }
 
-  $('.Other').html
+  $(".Other").html;
 }
+
+//  the start of the webapp, waiting for a submission
 
 function watchForm() {
   $(".submit").click(event => {
@@ -169,7 +167,6 @@ function watchForm() {
     $(".sorry").remove();
     getRecipes();
   });
-
 }
 
 $(function() {
@@ -177,14 +174,13 @@ $(function() {
   $("#results").hide();
   populateDropdowns();
   watchForm();
-  
-  console.log(STORE.exclusions)
+
+  console.log(STORE.exclusions);
 });
 
 // creates the toggle effect for dropdown menus
 
 $(function toggleDropdown() {
-
   $("#exclusion-button").click(function() {
     $("#myExclusion").toggle();
   });
@@ -196,14 +192,21 @@ $(function toggleDropdown() {
   $(document).on("click", function(event) {
     let trigger = $("#exclusion-button")[0];
     let dropdown = $("#myExclusion");
-    if (dropdown !== event.target && !dropdown.has(event.target).length && trigger !== event.target) {
+    if (
+      dropdown !== event.target &&
+      !dropdown.has(event.target).length &&
+      trigger !== event.target
+    ) {
       $("#myExclusion").hide();
     }
     let trigger2 = $("#intolerance-button")[0];
     let dropdown2 = $("#myIntolerance");
-    if (dropdown2 !== event.target && !dropdown2.has(event.target).length && trigger2 !== event.target) {
+    if (
+      dropdown2 !== event.target &&
+      !dropdown2.has(event.target).length &&
+      trigger2 !== event.target
+    ) {
       $("#myIntolerance").hide();
     }
   });
 });
-
