@@ -162,8 +162,8 @@ header h3 {
 /* ***** results section ***** */
 
 #results {
-    background-color: rgba(32, 32, 32, 0.473);
-    /* background-color: rgba(245, 245, 245); */
+    /* background-color: rgba(32, 32, 32, 0.473); */
+    background-color: rgba(245, 245, 245);
     border-radius: 5px;
     display: inline-block;
     max-height: 70vh;
