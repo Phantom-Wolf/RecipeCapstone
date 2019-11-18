@@ -1,7 +1,7 @@
 const apiKey = "21b612134db24ae285c7a2db190c41fc";
 let searchURL = "https://api.spoonacular.com/recipes/complexSearch";
 
-// makes use of and formats the api request returns for html doc
+// makes use of, and formats, the api request returns for html doc
 
 function displayResults(responseJson) {
   console.log(responseJson);
@@ -40,7 +40,7 @@ function displayResults(responseJson) {
   let wine = responseJson.winePairing;
   if (wine.pairedWines.length > "0") {
     $(`#${responseJson.id} .prelimInfo`).append(`
-    <p>Wine Pairing: ${wine.pairingText}</p>
+    <p><span>Wine Pairing:</span> ${wine.pairingText}</p>
     `);
   }
 
@@ -55,11 +55,12 @@ function displayResults(responseJson) {
     <p>No instructions needed, just mix together!</p>
   `);
   }
-
-  $("#results").show();
+  $('#recipe-search').val("");
+  $("#results").removeClass("hidden");
 }
 
-// these 3 build the url request to the api and gethers the return
+//  the following 3 build the url, fetches initial request for recipes, takes that
+//  data and fetches another request for full details.
 
 function formatQueryParams(params) {
   const queryItems = Object.keys(params).map(
@@ -116,7 +117,7 @@ function getDetails(responseJson) {
     $("#results").append(`
     <p>Sorry! We did not find any matching results.</p>
     `);
-    $("#results").show();
+    $("#results").removeClass("hidden");
   } else {
     for (let i = 0; i < responseJson.results.length; i++) {
       fetch(
@@ -141,15 +142,22 @@ function getDetails(responseJson) {
 function populateDropdowns() {
   let exclude = STORE.exclusions;
   for (let i = 0; i < exclude.length; i++) {
-    $("#myExclusion").append(`
-    <label class="drop-items ${exclude[i]}"><input type="checkbox" name="exclusion" value="${exclude[i]}">${exclude[i]}</label>
+    $("#myExclude").append(`
+    <label class="drop-items ${exclude[i]}">
+      <input type="checkbox"  name="${exclude[i]}" value="${exclude[i]}">
+      <span class="checkmark"></span>${exclude[i]}
+    </label>
     `);
   }
 
   let allergy = STORE.allergies;
   for (let i = 0; i < allergy.length; i++) {
-    $("#myIntolerance").append(`
-    <label class="drop-items ${allergy[i]}"><input type="checkbox" name="exclusion" value="${allergy[i]}">${allergy[i]}</label>
+    $("#myAllergy").append(`
+    <label class="drop-items ${allergy[i]}">
+      <input type="checkbox" name="exclusion" value="${allergy[i]}">
+      <span class="checkmark"></span>
+      ${allergy[i]}
+    </label>
     `);
   }
 
@@ -163,50 +171,57 @@ function watchForm() {
     event.preventDefault();
     $(".list").empty();
     $(".err-js").empty();
-    $("#results").hide();
+    $("#results").addClass("hidden");
     $(".sorry").remove();
+    $('header').css("height","auto")
+    $('.title').css("margin","5px auto")
     getRecipes();
   });
 }
 
 $(function() {
   console.log("App loaded! Waiting for submit!");
-  $("#results").hide();
+  $("#results").addClass("hidden");
   populateDropdowns();
   watchForm();
 
   console.log(STORE.exclusions);
 });
 
-// creates the toggle effect for dropdown menus
+// creates the toggle effect for dropdown menus with document click hide()
 
 $(function toggleDropdown() {
   $("#exclusion-button").click(function() {
-    $("#myExclusion").toggle();
+    $("#myExclude").toggle();
   });
 
-  $("#intolerance-button").click(function() {
-    $("#myIntolerance").toggle();
+  $("#allergy-button").click(function() {
+    $("#myAllergy").toggle();
   });
 
   $(document).on("click", function(event) {
     let trigger = $("#exclusion-button")[0];
-    let dropdown = $("#myExclusion");
+    let dropdown = $("#myExclude");
     if (
       dropdown !== event.target &&
       !dropdown.has(event.target).length &&
       trigger !== event.target
     ) {
-      $("#myExclusion").hide();
+      $("#myExclude").hide();
     }
-    let trigger2 = $("#intolerance-button")[0];
-    let dropdown2 = $("#myIntolerance");
+    let trigger2 = $("#allergy-button")[0];
+    let dropdown2 = $("#myAllergy");
     if (
       dropdown2 !== event.target &&
       !dropdown2.has(event.target).length &&
       trigger2 !== event.target
     ) {
-      $("#myIntolerance").hide();
+      $("#myAllergy").hide();
     }
   });
 });
+
+
+
+
+

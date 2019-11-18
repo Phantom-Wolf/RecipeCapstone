@@ -1,68 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://kit.fontawesome.com/503137705b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="main.css">
-    <title>recipes</title>
+    <link href="https://fonts.googleapis.com/css?family=Cantarell|Poiret+One&display=swap" rel="stylesheet">    <title>recipes</title>
 </head>
-<body>
-   <header>
-    <h1 class="title">Kitchen to Plate</h1>
-    <h3>Find the perfect recipe for that dinner date with friends.</h3>
-   </header>
 
-   <main>
-        <section class="main-search">
-            
+<body>
+    <header>
+        <h1 class="title">Kitchen to Plate</h1>
+        <h3>Find the perfect recipe for your next gathering with friends.</h3>
+    </header>
+
+    <main>
+        <form class="main-search">
+
             <p>What's for dinner? </p>
             <input type="text" name="recipe" id="recipe-search" placeholder=" Choose any food!" required>
-            <p>Exclude recipes with certain ingredients here:</p>
+            <p>Exclude recipes with selected ingredients here:</p>
             <div class="dropdown-pair">
                 <div class="dropdown">
-                    
-                    <button id="exclusion-button" class="dropbtn">Ingredients <i class="fas fa-caret-down"></i> </button>
-                    <div id="myExclusion" class="dropdown-contentA">
+
+                    <button id="exclusion-button" type="button" class="dropbtn">Ingredients <i class="fas fa-caret-down"></i>
+                    </button>
+                    <div id="myExclude" class="dropdown-contentA">
                             
                     </div>
                 </div>
-                
+
                 <div class="dropdown">
-                    
-                    <button id="intolerance-button" class="dropbtn">Allergies? <i class="fas fa-caret-down"></i> </button>
-                    <div id="myIntolerance" class="dropdown-contentB">
-                            
+
+                    <button id="allergy-button" type="button" class="dropbtn">Allergies? <i class="fas fa-caret-down"></i> </button>
+                    <div id="myAllergy" class="dropdown-contentB">
+
                     </div>
                 </div>
 
                 <button type="submit" class="submit">
-                        <i class="fas fa-search 2x"></i>
-                    </button>
+                    <i class="fas fa-search 2x"></i>
+                </button>
             </div>
 
-            
 
-        </section>
+
+        </form>
 
         <p class="error-message err-js"></p>
 
-        <section id="results" class="hidden">
+        <section id="results" class="">
             <h2>Here's what we could find:</h2>
             <ul class="list">
 
             </ul>
         </section>
 
-   </main>
+    </main>
 
-   
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="STORE.js"></script>
     <script src="index.js"></script>
-  </body>
+</body>
+
 </html>
