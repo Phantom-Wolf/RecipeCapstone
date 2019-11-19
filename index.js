@@ -114,8 +114,10 @@ function getDetails(responseJson) {
   console.log(responseJson);
 
   if (responseJson.results.length < "1") {
-    $("#results").append(`
+    $(".list").append(`
+    <li>
     <p>Sorry! We did not find any matching results.</p>
+    </li>
     `);
     $("#results").removeClass("hidden");
   } else {
@@ -169,12 +171,14 @@ function populateDropdowns() {
 function watchForm() {
   $(".submit").click(event => {
     event.preventDefault();
-    $(".list").empty();
+    $(".list").html("");
+    // $(".list").empty();
     $(".err-js").empty();
     $("#results").addClass("hidden");
     $(".sorry").remove();
     $('header').css("height","auto")
     $('.title').css("margin","5px auto")
+    
     getRecipes();
   });
 }
