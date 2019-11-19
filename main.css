@@ -4,7 +4,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* outline: 1px solid red; */
 }
 
 h1, h2, h3, p, li, a, label, input {
@@ -47,11 +46,11 @@ h2,h3{
 /* ***** header ***** */
 
 header{
-    height: 44vh;
+    height: 40vh;
     transition: height ease .7s;
 }
 .title {
-    margin: 28vh auto 0;
+    margin: 30vh auto 0;
     text-align: center;
     font-family: 'Poiret One', cursive;
     font-weight: 250;
@@ -61,7 +60,7 @@ header{
 
 header h3 {
     
-    margin: 10px auto 20px;
+    margin: 5px auto;
     text-align: center;
     
 }
@@ -292,6 +291,15 @@ span {
 }
 
 @media only screen and (max-width: 600px) {
+    body{
+        height: 100vh;
+    }
+    header{
+        height: 30vh;
+    }
+    .title {
+        margin: 17vh auto 0;
+    }
     .main-search p {
         margin: 10px 0px 5px;
     }
@@ -302,7 +310,7 @@ span {
     }
     #results {
         width: 98vw;
-        max-height: 62vh;
+        max-height: 55vh;
     }
     #results h2 {
         font-size: larger;
