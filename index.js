@@ -50,7 +50,7 @@ function displayResults(responseJson) {
       <p>${responseJson.instructions}</p>
     `);
   } else {
-    $(".recipeInstructions").append(`
+    $(`#${responseJson.id} .recipeInstructions`).append(`
     <h3>Instructions</h3>
     <p>No instructions needed, just mix together!</p>
   `);
@@ -59,8 +59,8 @@ function displayResults(responseJson) {
   $("#results").removeClass("hidden");
 }
 
-//  the following 3 build the url, fetches initial request for recipes, takes that
-//  data and fetches another request for full details.
+//  the following 3 functions builds the url, fetches initial request for recipes, takes
+//  that data and fetches another request for full details.
 
 function formatQueryParams(params) {
   const queryItems = Object.keys(params).map(
@@ -181,8 +181,9 @@ function watchForm() {
 
 $(function() {
   console.log("App loaded! Waiting for submit!");
-  $("#results").addClass("hidden");
+  $("#results").addClass("hidden")
   populateDropdowns();
+  $("#search-recipe").focus();
   watchForm();
 
   console.log(STORE.exclusions);

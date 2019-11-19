@@ -47,21 +47,21 @@ h2,h3{
 /* ***** header ***** */
 
 header{
-    height: 40vh;
+    height: 44vh;
     transition: height ease .7s;
 }
 .title {
-    margin: 30vh auto 0;
+    margin: 28vh auto 0;
     text-align: center;
     font-family: 'Poiret One', cursive;
-    font-weight: 200;
-    font-size: 40px;
+    font-weight: 250;
+    font-size: 50px;
     transition: margin ease-in .7s;
 }
 
 header h3 {
     
-    margin: 10px auto;
+    margin: 10px auto 20px;
     text-align: center;
     
 }
@@ -79,6 +79,8 @@ header h3 {
 .main-search p {
     margin: 5px;
 }
+
+
 
 #recipe-search {
     width: 20vw;
@@ -291,7 +293,7 @@ span {
 
 @media only screen and (max-width: 600px) {
     .main-search p {
-        margin: 15px 0px;
+        margin: 10px 0px 5px;
     }
     .dropdown-pair {
         display: flex;
