@@ -8,7 +8,7 @@
 
 h1, h2, h3, p, li, a, label, input {
     font-family: 'Segoe UI', 'Roboto', arial, sans-serif;
-    /* color: rgb(224, 224, 224); */
+    /* color: rgb(224, 224, 224);  */
 }
 
 p{
@@ -295,10 +295,10 @@ span {
         height: 100vh;
     }
     header{
-        height: 30vh;
+        height: auto;
     }
     .title {
-        margin: 17vh auto 0;
+        margin: 5px auto 0;
     }
     .main-search p {
         margin: 10px 0px 5px;
