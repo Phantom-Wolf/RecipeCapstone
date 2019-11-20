@@ -91,7 +91,7 @@ function getRecipes() {
   const params = {
     apiKey: apiKey,
     query: searchTerm,
-    number: 2,
+    number: 6,
     intolerances: allergies,
     excludeIngredients: exclude,
     maxReadyTime: 30
