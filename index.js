@@ -39,7 +39,8 @@ function displayResults(responseJson) {
     `);
   }
   let wine = responseJson.winePairing;
-  if (wine.pairedWines.length > "0") {
+  
+  if (wine.pairedWines && wine.pairedWines.length > 0) {
     $(`#${responseJson.id} .prelimInfo`).append(`
     <p><span>Wine Pairing:</span> ${wine.pairingText}</p>
     `);
@@ -59,7 +60,7 @@ function displayResults(responseJson) {
   
   $('#recipe-search').val("");
 
-  $('.results-js').show();
+  $('.results-js').removeClass("hidden");
 }
 
 //  the following 3 functions builds the url, fetches initial request for recipes, takes
@@ -110,19 +111,20 @@ function getRecipes() {
     .then(responseJson => getDetails(responseJson))
     .catch(error => {
       $("#err-js").text(`Something went wrong: ${error.message}`);
+      console.log(error);
     });
 }
 
 function getDetails(responseJson) {
-  
+  console.log(responseJson);
 
-  if (responseJson.results.length < "1") {
+  if (responseJson.results.length < 1) {
     $(".list").append(`
     <li>
     <p>Sorry! We did not find any matching results.</p>
     </li>
     `);
-    $('.results-js').show();
+    $('.results-js').removeClass("hidden");
   } else {
     for (let i = 0; i < responseJson.results.length; i++) {
       fetch(
@@ -137,6 +139,7 @@ function getDetails(responseJson) {
         .then(responseJson => displayResults(responseJson))
         .catch(error => {
           $("#err-js").text(`Something went wrong: ${error.message}`);
+          console.log(error);
         });
     }
   }
@@ -148,7 +151,7 @@ function populateDropdowns() {
   let exclude = STORE.exclusions;
   for (let i = 0; i < exclude.length; i++) {
     $("#myExclude").append(`
-    <label class="drop-items ${exclude[i]}" tabindex="0">
+    <label class="drop-items ${exclude[i]}" tabindex="4">
       <input type="checkbox"  name="${exclude[i]}" value="${exclude[i]}">
       <span class="checkmark"></span>${exclude[i]}
     </label>
@@ -158,7 +161,7 @@ function populateDropdowns() {
   let allergy = STORE.allergies;
   for (let i = 0; i < allergy.length; i++) {
     $("#myAllergy").append(`
-    <label class="drop-items ${allergy[i]}" tabindex="0">
+    <label class="drop-items ${allergy[i]}" tabindex="7">
       <input type="checkbox" name="exclusion" value="${allergy[i]}">
       <span class="checkmark"></span>
       ${allergy[i]}
@@ -172,12 +175,12 @@ function populateDropdowns() {
 //  the start of the webapp, waiting for a submission
 
 function watchForm() {
-  $('.results-js').hide();
+  $('.results-js').addClass("hidden");
   $(".main-search").submit(event => {
     event.preventDefault();
     $(".list").html("");
     $(".err-js").empty();
-    $('.results-js').hide();
+    $('.results-js').addClass("hidden");
     $(".sorry").remove();
     $('header').css("height","auto")
     $('.title').css("margin","5px auto")
