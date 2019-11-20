@@ -178,7 +178,12 @@ header h3 {
     padding: 3px;
     width: 75vw;
     margin: 0 auto;
-    transition: opacity .6s; 
+    transition: opacity .6s !important; 
+}
+
+.hidden{
+    opacity: 0;
+    height: 0;
 }
 
 .sorry {
@@ -235,10 +240,7 @@ span {
     font-weight: 500;
 }
 
-.hidden{
-    height:0;
-    opacity : 0;
-}
+
 
 
 

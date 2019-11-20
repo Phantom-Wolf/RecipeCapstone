@@ -4,7 +4,7 @@ let searchURL = "https://api.spoonacular.com/recipes/complexSearch";
 // makes use of, and formats, the api request returns for html doc
 
 function displayResults(responseJson) {
-  
+  console.log(responseJson);
   $(".list").append(`
   
   <li id="${responseJson.id}">
@@ -28,8 +28,7 @@ function displayResults(responseJson) {
     </div>
   </li>
   `);
- $('#recipe-search').val("");
-  $("#results").removeClass("hidden");
+
 
   let ingredients = responseJson.extendedIngredients;
   for (let i = 0; i < ingredients.length; i++) {
@@ -57,7 +56,10 @@ function displayResults(responseJson) {
     <p>No instructions needed, just mix together!</p>
   `);
   }
- 
+  
+  $('#recipe-search').val("");
+
+  $('.results-js').show();
 }
 
 //  the following 3 functions builds the url, fetches initial request for recipes, takes
@@ -120,7 +122,7 @@ function getDetails(responseJson) {
     <p>Sorry! We did not find any matching results.</p>
     </li>
     `);
-    $("#results").removeClass("hidden");
+    $('.results-js').show();
   } else {
     for (let i = 0; i < responseJson.results.length; i++) {
       fetch(
@@ -146,7 +148,7 @@ function populateDropdowns() {
   let exclude = STORE.exclusions;
   for (let i = 0; i < exclude.length; i++) {
     $("#myExclude").append(`
-    <label class="drop-items ${exclude[i]}">
+    <label class="drop-items ${exclude[i]}" tabindex="0">
       <input type="checkbox"  name="${exclude[i]}" value="${exclude[i]}">
       <span class="checkmark"></span>${exclude[i]}
     </label>
@@ -156,7 +158,7 @@ function populateDropdowns() {
   let allergy = STORE.allergies;
   for (let i = 0; i < allergy.length; i++) {
     $("#myAllergy").append(`
-    <label class="drop-items ${allergy[i]}">
+    <label class="drop-items ${allergy[i]}" tabindex="0">
       <input type="checkbox" name="exclusion" value="${allergy[i]}">
       <span class="checkmark"></span>
       ${allergy[i]}
@@ -170,12 +172,12 @@ function populateDropdowns() {
 //  the start of the webapp, waiting for a submission
 
 function watchForm() {
+  $('.results-js').hide();
   $(".main-search").submit(event => {
     event.preventDefault();
     $(".list").html("");
-    // $(".list").empty();
     $(".err-js").empty();
-    $("#results").addClass("hidden");
+    $('.results-js').hide();
     $(".sorry").remove();
     $('header').css("height","auto")
     $('.title').css("margin","5px auto")
@@ -185,7 +187,6 @@ function watchForm() {
 }
 
 $(function() {
-  $("#results").addClass("hidden")
   populateDropdowns();
   $("#search-recipe").focus();
   watchForm();
