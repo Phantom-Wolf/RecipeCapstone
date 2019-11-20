@@ -4,7 +4,7 @@ let searchURL = "https://api.spoonacular.com/recipes/complexSearch";
 // makes use of, and formats, the api request returns for html doc
 
 function displayResults(responseJson) {
-  console.log(responseJson);
+  
   $(".list").append(`
   
   <li id="${responseJson.id}">
@@ -28,6 +28,8 @@ function displayResults(responseJson) {
     </div>
   </li>
   `);
+ $('#recipe-search').val("");
+  $("#results").removeClass("hidden");
 
   let ingredients = responseJson.extendedIngredients;
   for (let i = 0; i < ingredients.length; i++) {
@@ -55,8 +57,7 @@ function displayResults(responseJson) {
     <p>No instructions needed, just mix together!</p>
   `);
   }
-  $('#recipe-search').val("");
-  $("#results").removeClass("hidden");
+ 
 }
 
 //  the following 3 functions builds the url, fetches initial request for recipes, takes
@@ -95,7 +96,7 @@ function getRecipes() {
 
   const queryString = formatQueryParams(params);
   const url = searchURL + "?" + queryString;
-  console.log(url);
+  
 
   fetch(url)
     .then(response => {
@@ -111,7 +112,7 @@ function getRecipes() {
 }
 
 function getDetails(responseJson) {
-  console.log(responseJson);
+  
 
   if (responseJson.results.length < "1") {
     $(".list").append(`
@@ -169,7 +170,7 @@ function populateDropdowns() {
 //  the start of the webapp, waiting for a submission
 
 function watchForm() {
-  $(".submit").click(event => {
+  $(".main-search").submit(event => {
     event.preventDefault();
     $(".list").html("");
     // $(".list").empty();
@@ -184,13 +185,10 @@ function watchForm() {
 }
 
 $(function() {
-  console.log("App loaded! Waiting for submit!");
   $("#results").addClass("hidden")
   populateDropdowns();
   $("#search-recipe").focus();
   watchForm();
-
-  console.log(STORE.exclusions);
 });
 
 // creates the toggle effect for dropdown menus with document click hide()
