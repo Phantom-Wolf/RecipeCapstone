@@ -151,8 +151,8 @@ function populateDropdowns() {
   let exclude = STORE.exclusions;
   for (let i = 0; i < exclude.length; i++) {
     $("#myExclude").append(`
-    <label class="drop-items ${exclude[i]}" tabindex="4">
-      <input type="checkbox"  name="${exclude[i]}" value="${exclude[i]}">
+    <label class="drop-items ${exclude[i]}" >
+      <input type="checkbox"  name="${exclude[i]}" tabindex="4" value="${exclude[i]}">
       <span class="checkmark"></span>${exclude[i]}
     </label>
     `);
@@ -161,8 +161,8 @@ function populateDropdowns() {
   let allergy = STORE.allergies;
   for (let i = 0; i < allergy.length; i++) {
     $("#myAllergy").append(`
-    <label class="drop-items ${allergy[i]}" tabindex="7">
-      <input type="checkbox" name="exclusion" value="${allergy[i]}">
+    <label class="drop-items ${allergy[i]}" >
+      <input type="checkbox" name="exclusion" tabindex="7" value="${allergy[i]}">
       <span class="checkmark"></span>
       ${allergy[i]}
     </label>
