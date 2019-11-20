@@ -49,6 +49,7 @@ header{
     height: 40vh;
     transition: height ease .7s;
 }
+
 .title {
     margin: 30vh auto 0;
     text-align: center;
@@ -59,10 +60,8 @@ header{
 }
 
 header h3 {
-    
     margin: 5px auto;
     text-align: center;
-    
 }
 
 /* ***** search body ***** */
@@ -81,11 +80,7 @@ header h3 {
     margin: 5px;
 }
 
-
-
 #recipe-search {
-    
-    
     border-radius: 20px;
     border: 2px solid darkgrey;
     padding: 5px;
@@ -95,7 +90,6 @@ header h3 {
     margin-right: 0;
     margin: 5px auto;
     width: 20vw;
-    
 }
 
 .error-message {
@@ -239,10 +233,6 @@ span {
 .recipeBody{
     font-weight: 500;
 }
-
-
-
-
 
 /* ***** scroll bar styling ***** */
 
