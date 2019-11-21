@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Percise, Perfect Recipes">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0"/>  
     <script src="https://kit.fontawesome.com/503137705b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="main.css">
@@ -22,13 +22,14 @@
     <main>
         <form class="main-search">
 
-            <p class="search-question">What's for dinner? </p>
+            <label for="recipe-search">What's for dinner?</label>
             <input type="text" name="recipe" id="recipe-search" placeholder=" Choose any food or cuisine!" required tabindex="1">
+            
             <p>Exclude recipes with selected ingredients here:</p>
             <div class="dropdown-pair">
                 <div class="dropdown">
 
-                    <button id="exclusion-button" type="button" tabindex="2" class="dropbtn">Ingredients <i class="fas fa-caret-down"></i>
+                    <button id="exclusion-button" type="button" name="exclude" tabindex="2" class="dropbtn">Ingredients <i class="fas fa-caret-down"></i>
                     </button>
                     <div id="myExclude" class="dropdown-contentA" tabindex="3">
                             
@@ -37,13 +38,13 @@
 
                 <div class="dropdown">
 
-                    <button id="allergy-button" type="button" tabindex="5" class="dropbtn">Allergies? <i class="fas fa-caret-down"></i> </button>
+                    <button id="allergy-button" type="button" name="allergy" tabindex="5" class="dropbtn">Allergies? <i class="fas fa-caret-down"></i> </button>
                     <div id="myAllergy" class="dropdown-contentB" tabindex="6">
 
                     </div>
                 </div>
 
-                <button type="submit" class="submit" tabindex="8" >
+                <button type="submit" name="submit" class="submit" tabindex="8" >
                     <i class="fas fa-search 2x"></i>
                 </button>
             </div>

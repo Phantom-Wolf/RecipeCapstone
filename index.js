@@ -1,3 +1,5 @@
+// 'use strict'
+
 const apiKey = "21b612134db24ae285c7a2db190c41fc";
 let searchURL = "https://api.spoonacular.com/recipes/complexSearch";
 
@@ -10,7 +12,9 @@ function displayResults(responseJson) {
   <li id="${responseJson.id}">
     <h2>${responseJson.title}</h2>
     <div class="short-recipe-container">
-        <img src="${responseJson.image}" alt="${responseJson.title}" class="recipe-image-short">
+        <img src="${responseJson.image}" 
+              alt="${responseJson.title}" 
+              class="recipe-image-short">
       <section class="prelimInfo">
         <p>Serving Size: ${responseJson.servings}</p>
         <p>Made ready in ${responseJson.readyInMinutes} minutes!</p>
