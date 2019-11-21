@@ -110,7 +110,7 @@ function getRecipes() {
     })
     .then(responseJson => getDetails(responseJson))
     .catch(error => {
-      $("#err-js").text(`Something went wrong: ${error.message}`);
+      $(".err-js").text(`Something went wrong: ${error.message}`);
       console.log(error);
     });
 }
