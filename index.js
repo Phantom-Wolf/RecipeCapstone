@@ -61,8 +61,6 @@ function displayResults(responseJson) {
     <p>No instructions needed, just mix together!</p>
   `);
   }
-  
-  $('#recipe-search').val("");
 
   $('.results-js').removeClass("hidden");
 }
